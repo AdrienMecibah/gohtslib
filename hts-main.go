@@ -17,10 +17,9 @@ func Script(name string, code func()) func() {
 }
 
 func Main() {
-	println("outer main")
-	argv := ParseArgv[struct{script string; postLog bool}]()
+ 	argv := ParseArgv[struct{script string; postLog bool}]()
 	if !argv.present["script"] {
-		panic(fmt.Sprintf("-script flag is not specified\n"))
+		fmt.Printf("-script flag is not specified\n")
 		os.Exit(1)
 	}
     code, found := scripts[argv.flags.script]
