@@ -85,9 +85,9 @@ func VectorMaterial(material map[string]any, T float64, table map[string]map[str
 
 func PredictMaterialLine(input string, T float64, model Model, table map[string]map[string]float64) float64 {
 	material := ExtractMaterial(input)
-	vector := VectorMaterial(material, T, table, model.keys)
+	vector := VectorMaterial(material, T, table, model.Keys)
 	fmt.Printf("%v\n", vector)
-	result := model.predictRows([][]float64{vector})[0]
+	result := model.PredictRows([][]float64{vector})[0]
 	return result
 }
 
