@@ -54,7 +54,7 @@ var _ = Script("test-model", func(){
 			return true
 		}
 		for _, site := range SITES {
-			if IsIn(name+site, model.keys) {
+			if IsIn(name+site, model.Keys) {
 				return true
 			}
 		}
@@ -83,11 +83,11 @@ var _ = Script("test-model", func(){
 				newRow[cxs] = any(stringToFloat64(row[cxs]))
 			}
 			// fmt.Printf("\x1b[38;5;226m%v\x1b[39m\n", newRow)
-			return VectorMaterial(newRow, stringToFloat64(row["T"])/float64(1250), mapTable, model.keys)
+			return VectorMaterial(newRow, stringToFloat64(row["T"])/float64(1250), mapTable, model.Keys)
 		}, 
 		dataset.IterRows(),
 	)
-	pred := model.predictRows(input)
+	pred := model.PredictRows(input)
 	target := Apply(stringToFloat64, dataset.columns["ZT"])
 	dataset.AddColumn("Prediction", Apply(float64ToString, pred))
 	fields := []string{"A", "As", "B", "Bs", "C", "Cs", "T", "ZT", "Prediction"}
@@ -120,7 +120,7 @@ var _ = Script("predict", func(){
 		panic(fmt.Sprintf("Unknown model \"%s\". Must be one of %v", argv.flags.model, Repr(Keys(models))))
 	}
 	material := ExtractMaterial(argv.flags.material)
-	// keys := Filter(func(key string)bool{return !(key=="T"||key=="CAs"||key=="CBs"||key=="CCs")}, model.keys)
+	// keys := Filter(func(key string)bool{return !(key=="T"||key=="CAs"||key=="CBs"||key=="CCs")}, model.Keys)
 	table := DataFrameFromCSV[string](argv.flags.table)
 	table = table.SelectRows(func(row map[string]string)bool{
 		for _, site := range SITES {
@@ -135,7 +135,7 @@ var _ = Script("predict", func(){
 			return true
 		}
 		for _, site := range SITES {
-			if IsIn(name+site, model.keys) {
+			if IsIn(name+site, model.Keys) {
 				return true
 			}
 		}
@@ -201,20 +201,20 @@ var _ = Script("search", func() {
 			dataset = ConvertDataFrame(IndexMethod(elements), classes)
 		})
 		Step("Loading table", func(){
-			keys = Filter(func(key string)bool{return !(key=="T"||key=="CAs"||key=="CBs"||key=="CCs")}, model.keys)
+			keys = Filter(func(key string)bool{return !(key=="T"||key=="CAs"||key=="CBs"||key=="CCs")}, model.Keys)
 			table = LoadMatrixTable(argv.flags.table, elements, keys)
 		})
 		Step("Building labels and input", func(){
 			labels, input = IterateOverClasses(dataset, table, keys, concentrations, float64(600)/float64(1250))
 		})
 		var predictionMethod func([][]float64)[]float64
-		if model.predictColumns == nil {
+		if model.PredictColumns == nil {
 			Step("Transposing", func(){
 				input = Transpose(input)
 			})
-			predictionMethod = model.predictRows
+			predictionMethod = model.PredictRows
 		} else {
-			predictionMethod = model.predictColumns
+			predictionMethod = model.PredictColumns
 		}
 		Step("Predicting", func(){
 			preds = predictionMethod(input)

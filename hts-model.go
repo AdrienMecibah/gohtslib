@@ -4,9 +4,9 @@
 package gohtslib
 
 type Model struct {
-	keys []string
-	predictColumns func([][]float64)[]float64
-	predictRows func([][]float64)[]float64
+	Keys []string
+	PredictColumns func([][]float64)[]float64
+	PredictRows func([][]float64)[]float64
 }
 
 var models map[string]Model = map[string]Model{}
