@@ -32,7 +32,7 @@ func GatherElements(df *DataFrame[string]) []string {
         }
         return result
 }
-func NamedClassBuilder(name string, builder func([]string)*DataFrame[string]) func([]string)*DataFrame[string] {
+func NamedClassesBuilder(name string, builder func([]string)*DataFrame[string]) func([]string)*DataFrame[string] {
         _, found := classesBuilders[name]
         if found {
                 panic("Class builder \""+name+"\" already exists")
