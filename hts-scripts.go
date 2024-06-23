@@ -170,7 +170,7 @@ var _ = Script("search", func() {
 			output string
 			siteCandidates string
 		}]()
-		
+
 		if !argv.present["classBuilder"] {
 			panic(fmt.Sprintf("Flag -class-builder is mandatory : must be one of %v", classesBuilders))
 		}
@@ -188,12 +188,12 @@ var _ = Script("search", func() {
 		}
 	
 		if argv.present["siteCandidates"] {
-			candidates, err := readSiteCandidates(argv.flags["siteCandidates"])
+			candidates, err := readSiteCandidates(argv.flags.siteCandidates)
 			if err != nil {
 				panic(err)
 			}
 			if !SetEq(Keys(candidates), PURE_SITES) {
-				panic(fmt.Sprintf("Keys in file %s must be %v, not %v", argv.flags["siteCandidates"], PURE_SITES, Keys(candidates)))
+				panic(fmt.Sprintf("Keys in file %s must be %v, not %v", argv.flags.siteCandidates, PURE_SITES, Keys(candidates)))
 			}
 			CANDIDATES = []string{}
 			for _, site := range PURE_SITES {
