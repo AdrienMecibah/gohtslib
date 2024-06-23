@@ -188,7 +188,7 @@ var _ = Script("search", func() {
 		}
 	
 		if argv.present["siteCandidates"] {
-			candidates, err := readSiteCandidates(argv.flags.siteCandidates)
+			candidates, err := SeadSiteCandidates(argv.flags.siteCandidates)
 			if err != nil {
 				panic(err)
 			}
