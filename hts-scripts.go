@@ -7,6 +7,12 @@ import (
 	"fmt"
 )
 
+var _ = Script("list-models", func(){
+	for name := range models {
+		println(name)
+	}
+})
+
 var _ = Script("test-model", func(){
 	argv := ParseArgv[struct{
 		model string
