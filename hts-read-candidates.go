@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-func readSiteCandidates(filename string) (map[string][]string, error) {
+func ReadSiteCandidates(filename string) (map[string][]string, error) {
 	file, err := os.Open(filename)
 	if err != nil {
 		return nil, fmt.Errorf("failed to open file: %v", err)
