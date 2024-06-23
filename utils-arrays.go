@@ -170,6 +170,25 @@ func SliceEq[T comparable](s1, s2 []T) bool {
 	return true
 }
 
+func SetEq[T comparable](s1, s2 []T) bool {
+	if len(s1) != len(s2) {
+		return false
+	}
+	for _, x1 := range s1 {
+		found := false
+		for _, x2 := range s2 {
+			if x1 == x2 {
+				found = true
+				break
+			}
+		}
+		if !found {
+			return false
+		}
+	}
+	return true
+}
+
 func Copy[T any](array []T) []T {
 	result := make([]T, len(array))
 	for i, value := range array {
