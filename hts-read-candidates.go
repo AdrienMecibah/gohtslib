@@ -18,7 +18,7 @@ func ReadSiteCandidates(filename string) (map[string][]string, error) {
 		for _, site := range PURE_SITES {
 			result[site] = []string{}
 		}
-		for _, row := df.IterRows() {
+		for _, row := range df.IterRows() {
 			for _, site := range SITES {
 				if IsIn(row[site], []string{"yes", "y"}) {
 					result[site] = append(result[site], row["Element"])
