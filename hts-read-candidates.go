@@ -9,7 +9,7 @@ import (
 )
 
 func ReadSiteCandidates(filename string) (map[string][]string, error) {
-	if string.EndsWith(strings.ToLower(filename), ".csv") {
+	if strings.EndsWith(strings.ToLower(filename), ".csv") {
 		df := DataFrameFromCSV[string](filename)
 		if !SetEq(df.Heads(), append(SITES, "Element")) {
 			return nil, fmt.Errorf("file does not contain the right headers, must be \"Element\", \"A\", \"B\" and \"C\"")
