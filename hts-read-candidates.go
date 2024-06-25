@@ -52,7 +52,7 @@ func ReadSiteCandidates(filename string) (map[string][]string, error) {
 		}
 		return nil, fmt.Errorf("failed to unmarshal JSON")
 	} else {
-		panic(fmt.Printf("Unknown extension for file, must be json or csv. File : %s", filename))
+		panic(fmt.Sprintf("Unknown extension for file, must be json or csv. File : %s", filename))
 		return nil, nil
 	}
 }
