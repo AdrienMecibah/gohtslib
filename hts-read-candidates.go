@@ -9,7 +9,7 @@ import (
 )
 
 func ReadSiteCandidates(filename string) (map[string][]string, error) {
-	if strings.EndsWith(strings.ToLower(filename), ".csv") {
+	if strings.HasSuffix(strings.ToLower(filename), ".csv") {
 		df := DataFrameFromCSV[string](filename)
 		if !SetEq(df.Heads(), append(SITES, "Element")) {
 			return nil, fmt.Errorf("file does not contain the right headers, must be \"Element\", \"A\", \"B\" and \"C\"")
@@ -28,7 +28,7 @@ func ReadSiteCandidates(filename string) (map[string][]string, error) {
 			}
 		}
 		return result, nil
-	} else if string.EndsWith(strings.ToLower(filename), ".json") {
+	} else if string.HasSuffix(strings.ToLower(filename), ".json") {
 		file, err := os.Open(filename)
 		if err != nil {
 			return nil, fmt.Errorf("failed to open file: %v", err)
