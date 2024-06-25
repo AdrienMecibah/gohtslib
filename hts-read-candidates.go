@@ -11,7 +11,7 @@ import (
 func ReadSiteCandidates(filename string) (map[string][]string, error) {
 	if strings.HasSuffix(strings.ToLower(filename), ".csv") {
 		df := DataFrameFromCSV[string](filename)
-		if !SetEq(df.Heads(), append(SITES, "Element")) {
+		if !SetEq(df.Heads(), append(PURE_SITES, "Element")) {
 			return nil, fmt.Errorf("file does not contain the right headers, must be \"Element\", \"A\", \"B\" and \"C\"")
 		}
 		result := make(map[string][]string, len(PURE_SITES))
@@ -19,7 +19,7 @@ func ReadSiteCandidates(filename string) (map[string][]string, error) {
 			result[site] = []string{}
 		}
 		for _, row := range df.IterRows() {
-			for _, site := range SITES {
+			for _, site := range PURE_SITES {
 				if IsIn(row[site], []string{"yes", "y"}) {
 					result[site] = append(result[site], row["Element"])
 				} else if !IsIn(row[site], []string{"no", "n"}) {
