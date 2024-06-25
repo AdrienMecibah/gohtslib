@@ -28,7 +28,7 @@ func ReadSiteCandidates(filename string) (map[string][]string, error) {
 			}
 		}
 		return result, nil
-	} else if string.HasSuffix(strings.ToLower(filename), ".json") {
+	} else if strings.HasSuffix(strings.ToLower(filename), ".json") {
 		file, err := os.Open(filename)
 		if err != nil {
 			return nil, fmt.Errorf("failed to open file: %v", err)
