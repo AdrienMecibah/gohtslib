@@ -12,7 +12,7 @@ func ReadSiteCandidates(filename string) (map[string][]string, error) {
 	if strings.HasSuffix(strings.ToLower(filename), ".csv") {
 		df := DataFrameFromCSV[string](filename)
 		if !SetEq(df.Heads(), append(PURE_SITES, "Element")) {
-			return nil, fmt.Errorf("file does not contain the right headers, must be \"Element\", \"A\", \"B\" and \"C\"")
+			return nil, fmt.Errorf("file does not contain the right headers, must be \"Element\", \"A\", \"B\" and \"C\", not %v != %v", df.Heads(), append(PURE_SITES, "Element"))
 		}
 		result := make(map[string][]string, len(PURE_SITES))
 		for _, site := range PURE_SITES {
