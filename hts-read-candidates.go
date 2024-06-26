@@ -9,7 +9,6 @@ import (
 )
 
 func ReadSiteCandidates(filename string) (map[string][]string, error) {
-	fmt.Printf("Debug : marking ReadSiteCandidates : \"%s\"\n", filename)
 	if strings.HasSuffix(strings.ToLower(filename), ".csv") {
 		df := DataFrameFromCSV[string](filename)
 		if !SetEq(df.Heads(), append(PURE_SITES, "Element")) {
@@ -41,7 +40,7 @@ func ReadSiteCandidates(filename string) (map[string][]string, error) {
 		}
 		var data map[string][]string
 		if err := json.Unmarshal(byteValue, &data); err == nil {
-			if !SetEq(Keys(data), append(SITES, "Element")) {
+			if !SetEq(Keys(data), append(PURE_SITES, "Element")) {
 				return nil, fmt.Errorf("file does not contain the right headers, must be \"Element\", \"A\", \"B\" and \"C\"")
 			}
 			return data, nil
