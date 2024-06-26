@@ -9,6 +9,7 @@ import (
 )
 
 func ReadSiteCandidates(filename string) (map[string][]string, error) {
+	fmt.Printf("Debug : marking ReadSiteCandidates : \"%s\"\n", filename)
 	if strings.HasSuffix(strings.ToLower(filename), ".csv") {
 		df := DataFrameFromCSV[string](filename)
 		if !SetEq(df.Heads(), append(PURE_SITES, "Element")) {
