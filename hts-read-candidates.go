@@ -41,7 +41,7 @@ func ReadSiteCandidates(filename string) (map[string][]string, error) {
 		var data map[string][]string
 		if err := json.Unmarshal(byteValue, &data); err == nil {
 			if !SetEq(Keys(data), PURE_SITES) {
-				return nil, fmt.Errorf("file does not contain the right headers, must be \"A\", \"B\" and \"C\", not %v != %v", Keys(data), PURE_SITES)
+				return nil, fmt.Errorf("!file does not contain the right headers, must be \"A\", \"B\" and \"C\", not %v != %v", Keys(data), PURE_SITES)
 			}
 			return data, nil
 		}
