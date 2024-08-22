@@ -89,7 +89,7 @@ var _ = Script("test-model", func(){
 				newRow[cxs] = any(stringToFloat64(row[cxs]))
 			}
 			// fmt.Printf("\x1b[38;5;226m%v\x1b[39m\n", newRow)
-			return VectorMaterial(newRow, stringToFloat64(row["T"])/float64(1250), mapTable, model.Keys)
+			return VectorMaterial(newRow, stringToFloat64(row["T"])/float64(1200), mapTable, model.Keys)
 		}, 
 		dataset.IterRows(),
 	)
@@ -241,7 +241,7 @@ var _ = Script("search", func() {
 			table = LoadMatrixTable(argv.flags.table, elements, keys)
 		})
 		Step("Building labels and input", func(){
-			labels, input = IterateOverClasses(dataset, table, keys, concentrations, float64(600)/float64(1250))
+			labels, input = IterateOverClasses(dataset, table, keys, concentrations, float64(600)/float64(1200))
 		})
 		var predictionMethod func([][]float64)[]float64
 		if model.PredictColumns == nil {
