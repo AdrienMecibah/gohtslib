@@ -36,6 +36,7 @@ func Rmse(target []float64, pred []float64) float64 {
 		fmt.Printf("[%d] %v %v \n", i, target[i], pred[i])
 		squaredSum += math.Pow(target[i]-pred[i], 2)
 	}
+	println("squaredSum = ", squaredSum)
 	return math.Pow(squaredSum/float64(len(target)), 0.5)
 }
 
