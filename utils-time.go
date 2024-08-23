@@ -41,7 +41,7 @@ func Rmse(target []float64, pred []float64) float64 {
 		}
 		squaredSum += math.Pow(target[i]-pred[i], 2)
 	}
-	println("squaredSum = ", squaredSum)
+	println("squaredSum = ", squaredSum, "length =", length, "len(target) =", len(target))
 	return math.Pow(squaredSum/length, 0.5)
 }
 
