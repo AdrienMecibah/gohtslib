@@ -62,7 +62,7 @@ func ExtractMaterial(line string) map[string]any {
 	return result
 }
 
-func VectorMaterial(material map[string]any, T float64, table map[string]map[string]float64, keys []string) []float64 {
+/*func VectorMaterial(material map[string]any, T float64, table map[string]map[string]float64, keys []string) []float64 {
 	if keys == nil {
 		keys = Apply(
 			func(elementAndSite []string) string {
@@ -79,6 +79,28 @@ func VectorMaterial(material map[string]any, T float64, table map[string]map[str
 	result[3] = material["CCs"].(float64)
 	for k, key := range keys {
 		result[4+k] = table[CropSite(key)][material[GetSite(key)].(string)]
+	}
+	return result
+}*/
+
+func VectorMaterial(material map[string]any, T float64, table map[string]map[string]float64, keys []string) []float64 {
+	if keys == nil {
+		keys = Apply(
+			func(elementAndSite []string) string {
+				return elementAndSite[0] + elementAndSite[1]
+			},
+			Product(Keys(table), SITES),
+		)
+	}
+	result := make([]float64, len(keys))
+	for k, key := range keys {
+		if key == "T" {
+			result[k] = T
+		} else if (key=="CAs"||key=="CBs"||key=="CCs") {
+			result[k] = material[key].(float64)
+		} else {
+			result[k] = table[CropSite(key)][material[GetSite(key)].(string)]
+		}
 	}
 	return result
 }
