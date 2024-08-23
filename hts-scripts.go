@@ -88,7 +88,7 @@ var _ = Script("test-model", func(){
 			for _, cxs := range CONCENTRATIONS {
 				newRow[cxs] = any(stringToFloat64(row[cxs]))
 			}
-			// fmt.Printf("\x1b[38;5;226m%v\x1b[39m\n", newRow)
+			fmt.Printf("\x1b[38;5;226m%v\x1b[39m\n", newRow)
 			return VectorMaterial(newRow, stringToFloat64(row["T"])/float64(1200), mapTable, model.Keys)
 		}, 
 		dataset.IterRows(),
