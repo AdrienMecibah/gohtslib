@@ -32,12 +32,17 @@ func Rmse(target []float64, pred []float64) float64 {
 		panic("target and prediction have different size")
 	}
 	squaredSum := float64(0)
+	length := float64(len(target))
 	for i := range target {
 		fmt.Printf("[%d] %v %v \n", i, target[i], pred[i])
+		if target[i] == 0 && fmt.Sprintf(pred[i]) == "NaN" {
+			length -= 1
+			continue
+		}
 		squaredSum += math.Pow(target[i]-pred[i], 2)
 	}
 	println("squaredSum = ", squaredSum)
-	return math.Pow(squaredSum/float64(len(target)), 0.5)
+	return math.Pow(squaredSum/length, 0.5)
 }
 
 func _FindBest(values []float64, labels []string, n int) ([]float64, []string) {
