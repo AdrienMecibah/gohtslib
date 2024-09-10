@@ -18,6 +18,7 @@ var _ = Script("test-model", func(){
 		model string
 		table string
 		input string
+		output string
 	}]()
 	if !argv.present["input"] {
 		panic(fmt.Sprintf("Flag -input is mandatory"))
@@ -99,6 +100,9 @@ var _ = Script("test-model", func(){
 	fields := []string{"A", "As", "B", "Bs", "C", "Cs", "T", "ZT", "Prediction"}
 	dataset = dataset.SelectColumns(func(name string, column []string)bool{return IsIn(name, fields)})
 	fmt.Printf("%v\nRMSE :%v\n", dataset, Rmse(target, pred))
+	if argv.present["output"] {
+		dataset.Save(argv.flags.output)
+	}
 })
 
 var _ = Script("predict", func(){
