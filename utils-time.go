@@ -34,7 +34,7 @@ func Rmse(target []float64, pred []float64) float64 {
 	squaredSum := float64(0)
 	length := float64(len(target))
 	for i := range target {
-		fmt.Printf("[%d] %v %v \n", i, target[i], pred[i])
+		// fmt.Printf("[%d] %v %v \n", i, target[i], pred[i])
 		if target[i] == 0 && fmt.Sprintf("%v", pred[i]) == "NaN" {
 			length -= 1
 			continue
