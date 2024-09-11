@@ -14,6 +14,10 @@ func intToString(i int) string { return strconv.Itoa(i) }
 func stringToInt(s string) int { result, _ := strconv.ParseInt(s, 10, 0); return int(result); }
 func float64ToString(f float64) string { return fmt.Sprintf("%v", f) }
 func stringToFloat64(s string) float64 { result, _ := strconv.ParseFloat(s, 64);	return float64(result); }
+func IntToString(i int) string { return strconv.Itoa(i) }
+func StringToInt(s string) int { result, _ := strconv.ParseInt(s, 10, 0); return int(result); }
+func Float64ToString(f float64) string { return fmt.Sprintf("%v", f) }
+func StringToFloat64(s string) float64 { result, _ := strconv.ParseFloat(s, 64);	return float64(result); }
 
 func AsAnySlice(obj any) ([]any, bool) {
 	value := reflect.ValueOf(obj)
