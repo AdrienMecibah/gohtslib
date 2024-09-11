@@ -8,6 +8,43 @@ import (
 	"fmt"
 )
 
+func ReadMapTable(filepath string) map[string]map[string]float64 {
+	table := DataFrameFromCSV[string](filepath)
+	table = table.SelectRows(func(row map[string]string)bool{
+		for _, site := range SITES {
+			for _, datasetRow := range dataset.IterRows() {
+				if datasetRow[site] == row["Element"] {
+					return true
+				}
+			}
+		}
+		return false
+	})
+	table = table.SelectColumns(func(name string, column[]string)bool{
+		if name == "Element" {
+			return true
+		}
+		for _, site := range SITES {
+			if IsIn(name+site, model.Keys) {
+				return true
+			}
+		}
+		return false
+	})
+	mapTable := Map(
+		func(key string) (string, map[string]float64) {
+			return key, Map(
+				func(row map[string]string) (string, float64) {
+					return row["Element"], stringToFloat64(row[key])
+				},
+				table.IterRows(),
+			)
+		},
+		Filter(func(h string)bool{return h!="Element"}, table.heads),
+	)
+	return mapTable
+}
+
 func WriteClassName(row map[string]string) string {
 	result := ""
 	for _, x := range SITES {
