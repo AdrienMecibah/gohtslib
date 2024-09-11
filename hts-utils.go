@@ -20,17 +20,6 @@ func ReadMapTable(filepath string) map[string]map[string]float64 {
 		}
 		return false
 	})
-	table = table.SelectColumns(func(name string, column[]string)bool{
-		if name == "Element" {
-			return true
-		}
-		for _, site := range SITES {
-			if IsIn(name+site, model.Keys) {
-				return true
-			}
-		}
-		return false
-	})
 	mapTable := Map(
 		func(key string) (string, map[string]float64) {
 			return key, Map(
