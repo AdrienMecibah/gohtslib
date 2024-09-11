@@ -99,10 +99,10 @@ var _ = Script("test-model", func(){
 	dataset.AddColumn("Prediction", Apply(float64ToString, pred))
 	fields := []string{"A", "As", "B", "Bs", "C", "Cs", "T", "ZT", "Prediction"}
 	dataset = dataset.SelectColumns(func(name string, column []string)bool{return IsIn(name, fields)})
-	fmt.Printf("%v\nRMSE :%v\n", dataset, Rmse(target, pred))
 	if argv.present["output"] {
 		dataset.Save(argv.flags.output)
 	}
+	fmt.Printf("%v\nRMSE :%v\n", dataset, Rmse(target, pred))
 })
 
 var _ = Script("predict", func(){
