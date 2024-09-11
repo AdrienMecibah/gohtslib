@@ -9,18 +9,7 @@ import (
 )
 
 func ReadMapTable(filepath string) map[string]map[string]float64 {
-	// corrected?
 	table := DataFrameFromCSV[string](filepath)
-	table = table.SelectRows(func(row map[string]string)bool{
-		for _, site := range SITES {
-			for _, datasetRow := range dataset.IterRows() {
-				if datasetRow[site] == row["Element"] {
-					return true
-				}
-			}
-		}
-		return false
-	})
 	mapTable := Map(
 		func(key string) (string, map[string]float64) {
 			return key, Map(
