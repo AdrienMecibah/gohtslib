@@ -17,6 +17,7 @@ func Script(name string, code func()) func() {
 }
 
 func Main() {
+    println("git-go-hts: last mod: Sept 11 2024")
  	argv := ParseArgv[struct{script string; postLog bool}]()
 	if !argv.present["script"] {
 		fmt.Printf("-script flag is not specified\n")
