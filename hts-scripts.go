@@ -33,6 +33,7 @@ var _ = Script("test-model", func(){
 	if !found {
 		panic(fmt.Sprintf("Unknown model \"%s\". Must be one of %v", argv.flags.model, Repr(Keys(models))))
 	}
+	fmt.Printf("Reading CSV file \"%s\"...\n", argv.flags.input)
 	dataset := DataFrameFromCSV[string](argv.flags.input)
 	dataset = DataFrameFromRows(Apply(
 		func(row map[string]string) map[string]string {
